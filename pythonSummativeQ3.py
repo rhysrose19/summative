@@ -1,4 +1,15 @@
 import random
+import logging
+#create and configure logger
+LOG_FORMAT = "%(levelname)s %(asctime)s - %(message)s"
+logging.basicConfig(filename = "error_file.log" ,
+                    level = logging.ERROR,
+                    format = LOG_FORMAT,
+                    )
+logger = logging.getLogger()
+
+#Test the logger
+logger.info("Our first message")
 
 transducerData = []
 def sensorDataGen(list = []):
@@ -19,19 +30,7 @@ data = sensorDataGen(transducerData) #corrupt data set
 #dataset= tuple(data)
 print(data)
 print(sensorDataGen.__doc__)
-''' 
-nValue= 0
 
-def numValue(string_data):
-#Calculate the numerical value of the string.Takes a string input parameter.
-    global nValue
-    for i in range(len(string_data)):
-        nValue += ord(string_data[i])
-    return nValue
-
-print(numValue('err'))
-
-'''
 #function to check for errors in data set
 def checkData(to_search, target):
     ''' serches the data set and finds index of the corrupt data.
@@ -42,27 +41,8 @@ def checkData(to_search, target):
         ntransducer += 1
         for j, value in enumerate(i):
             if value == target: #and numValue(str(value)) == numValue(target):
-                print("sensor number {}, transducer number{}".format(j,ntransducer))
+                #print("sensor number {}, transducer number{}".format(j,ntransducer))
+                logger.error("error found")
 
 checkData(data, 'err')
 
-
-''' 
-#takwimu=((1,2,'err'))
-def find_index(to_search, target):
-    Find the index of a value in a sequence
-    for j in to_search:
-        for i, value in enumerate(j):
-            if value == target:
-                print("sensor number {}".format(i))
-            else:
-                continue
-        print("transducer {}".format(j))
-
-index= find_index(data, 'err')
-print(index)
-
-'''
-#import logging
-#logging.warning('Watch out!')  # will print a message to the console
-#logging.info('I told you so')  # will not print anything
