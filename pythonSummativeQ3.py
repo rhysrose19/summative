@@ -40,8 +40,7 @@ def checkData(to_search, target):
     for i in to_search:
         ntransducer += 1
         for j, value in enumerate(i):
-            if value == target: #and numValue(str(value)) == numValue(target):
-                #print("sensor number {}, transducer number{}".format(j,ntransducer))
+            if value == target:
                 logger.error("error found")
 
 checkData(data, 'err')
